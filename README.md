@@ -23,7 +23,13 @@ This application leverages on this headroom to trigger a local Vision Language M
 
 ## How to Use the Application
 
-1. Clone the GitHub repository:
+First connect a USB-C Hub to the UNO Q. Next, connect a USB webcam to the Hub and power the system through the Power Delivery slot.
+
+![Hardware setup](assets/docs_assets/hardware-setup.jpg)
+
+Note that you need to select a model for the video_objectdetection brick. You can [load custom models](https://www.youtube.com/watch?v=X-GBxtfEP-8) to the boar using platforms such as Edge Impulse. This model will be run by main.py and trigger the VLM once specified object(s) are detected.
+
+1. On your personal computer, clone the GitHub repository:
 ```
 git clone https://github.com/SolomonGithu/object-detection-and-vlm-description.git
 ```
@@ -34,7 +40,7 @@ This repo includes backend and frontend code to capture frames from a USB camera
 
 In [main.py](python/main.py), `vlm_prompting_label` defines the class which when detected will trigger the VLM to be loaded and prompted with a text defined by `vlm_prompt`. To reduce computational data, a frame is first resized before passing it to the SmolVLM-256M model. In a Vision-Language Model (VLM), a prompt consists of text inputs and visual inputs (such as images or video frames). These are then converted into tokens which are numerical chunks of data that the AI processes.
 
-3. Afterwards, use SCP, VS Code's remote SSH extension or software such as WinSCP to copy the repo to the `/home/arduino/ArduinoApps/` folder on your UNO Q. Once this is completed, open App Lab and you should see the application listed in the 'My Apps' section of your App Lab.
+3. Afterwards, On your personal computer, use SCP, VS Code's remote SSH extension or software such as WinSCP to copy the repo to the `/home/arduino/ArduinoApps/` folder on your UNO Q. Once this is completed, open App Lab and you should see the application listed in the 'My Apps' section.
 
 ![My Apps](assets/docs_assets/my-apps.png)
 
@@ -42,4 +48,4 @@ In [main.py](python/main.py), `vlm_prompting_label` defines the class which when
 
 > **Note:** You can use either the SmolVLM-256M or SmolVLM-500M model. However, in my experiments involving image description of beverages on a table, the SmolVLM-256M model showed significant limitations in captioning. It occasionally produced hallucinated text, misidentified objects, and was less reliable in following instructions compared to the expectations. Looking at the model’s [training details](https://huggingface.co/HuggingFaceTB/SmolVLM-256M-Instruct#training-data), we can see that just 18% of the training data was dedicated to image captioning tasks. This and the smaller parameter size are likely constrains of its capacity, making it suitable for relatively simple image description use cases rather than detailed visual reasoning.
 
-To load the SmolVLM-256M model, you need to first download these files and put them in the [`models`](models/) folder: mmproj-SmolVLM-256M-Instruct-Q8_0.gguf and SmolVLM-256M-Instruct-Q8_0.gguf. Next, in [main.py](python/main.py) update `model_path` and `mmproj_path` to point to the downloaded SmolVLM-256M files.
+To load the SmolVLM-256M model, you need to first download these open-source files and put them in the [`models`](models/) folder: mmproj-SmolVLM-256M-Instruct-Q8_0.gguf and SmolVLM-256M-Instruct-Q8_0.gguf. Next, in [main.py](python/main.py) update `model_path` and `mmproj_path` to point to the downloaded SmolVLM-256M files.
