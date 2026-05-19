@@ -1,0 +1,8 @@
+name: Detect objects and describe them
+description: This application advances the Detect Objects on Camera example with contextual descriptions of objects through a local VLM.
+ports: []
+bricks:
+- arduino:video_object_detection:
+    model: ei-model-1000170-1
+- arduino:web_ui: {}
+icon: 🤖
