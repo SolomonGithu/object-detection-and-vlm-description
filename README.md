@@ -27,7 +27,7 @@ First connect a USB-C Hub to the UNO Q. Next, connect a USB webcam to the Hub an
 
 ![Hardware setup](assets/docs_assets/hardware-setup.jpg)
 
-Note that you need to select a model for the video_objectdetection brick. You can [load custom models](https://www.youtube.com/watch?v=X-GBxtfEP-8) to the boar using platforms such as Edge Impulse. This model will be run by main.py and trigger the VLM once specified object(s) are detected.
+Note that you need to select a model for the video_objectdetection brick. Train one on [Edge Impulse](https://www.edgeimpulse.com/) and load it to your UNO Q. Feel free to use follow this [tutorial](https://www.youtube.com/watch?v=X-GBxtfEP-8) on loading custom models to App Lab. Alternatively, you can also manually load models as shown in [this project](https://www.hackster.io/sologithu/running-local-vlms-on-arduino-uno-q-with-the-app-lab-70e8e3#toc-step-3--copy-tinyml-model-to-uno-q-3). This model will be run by main.py and prompt the VLM when the specified object is detected.
 
 1. On your personal computer, clone the GitHub repository:
 ```
@@ -40,7 +40,7 @@ This repo includes backend and frontend code to capture frames from a USB camera
 
 In [main.py](python/main.py), `vlm_prompting_label` defines the class which when detected will trigger the VLM to be loaded and prompted with a text defined by `vlm_prompt`. To reduce computational data, a frame is first resized before passing it to the SmolVLM-256M model. In a Vision-Language Model (VLM), a prompt consists of text inputs and visual inputs (such as images or video frames). These are then converted into tokens which are numerical chunks of data that the AI processes.
 
-3. Afterwards, On your personal computer, use SCP, VS Code's remote SSH extension or software such as WinSCP to copy the repo to the `/home/arduino/ArduinoApps/` folder on your UNO Q. Once this is completed, open App Lab and you should see the application listed in the 'My Apps' section.
+3. Afterwards, On your personal computer, use SCP, VS Code's remote SSH extension or software such as WinSCP to copy the updated repo to the `/home/arduino/ArduinoApps/` folder on your UNO Q. Once this is completed, open App Lab and you should see the application listed in the 'My Apps' section.
 
 ![My Apps](assets/docs_assets/my-apps.png)
 
