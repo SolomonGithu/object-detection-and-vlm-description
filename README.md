@@ -40,11 +40,13 @@ This repo includes backend and frontend code to capture frames from a USB camera
 
 In [main.py](python/main.py), `vlm_prompting_label` defines the class which when detected will trigger the VLM to be loaded and prompted with a text defined by `vlm_prompt`. To reduce computational data, a frame is first resized before passing it to the SmolVLM-256M model. In a Vision-Language Model (VLM), a prompt consists of text inputs and visual inputs (such as images or video frames). These are then converted into tokens which are numerical chunks of data that the AI processes.
 
-3. Afterwards, On your personal computer, use SCP, VS Code's remote SSH extension or software such as WinSCP to copy the updated repo to the `/home/arduino/ArduinoApps/` folder on your UNO Q. Once this is completed, open App Lab and you should see the application listed in the 'My Apps' section.
+3. Open [app.yaml](app.yaml) file and replace ei-model-1000170-1 with the model id value as defined in the model.yaml file. **IMPORTANT!!** Ensure that the folder name created in custom-ei matches the value specified in the id field of model.yaml. The same id value must also be used in app.yaml.
+
+4. Afterwards, On your personal computer, use SCP, VS Code's remote SSH extension or software such as WinSCP to copy the updated repo to the `/home/arduino/ArduinoApps/` folder on your UNO Q. Once this is completed, open App Lab and you should see the application listed in the 'My Apps' section.
 
 ![My Apps](assets/docs_assets/my-apps.png)
 
-4. On App Lab, click the application and launch it with the 'Run' button. Starting the application for the first time will take some seconds since the system needs to pull necessary Docker images. Once this is finished the application container will be started and the app will automatically open in the web browser. You can also open the Web UI manually on the browser by setting URL to the local IP address of the UNO Q and port 7000.
+5. On App Lab, click the application and launch it with the 'Run' button. Starting the application for the first time will take some seconds since the system needs to pull necessary Docker images. Once this is finished the application container will be started and the app will automatically open in the web browser. You can also open the Web UI manually on the browser by setting URL to the local IP address of the UNO Q and port 7000.
 
 > **Note:** You can use either the SmolVLM-256M or SmolVLM-500M model. However, in my experiments involving image description of beverages on a table, the SmolVLM-256M model showed significant limitations in captioning. It occasionally produced hallucinated text, misidentified objects, and was less reliable in following instructions compared to the expectations. Looking at the model’s [training details](https://huggingface.co/HuggingFaceTB/SmolVLM-256M-Instruct#training-data), we can see that just 18% of the training data was dedicated to image captioning tasks. This and the smaller parameter size are likely constrains of its capacity, making it suitable for relatively simple image description use cases rather than detailed visual reasoning.
 
